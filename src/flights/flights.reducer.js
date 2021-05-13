@@ -1,8 +1,12 @@
 import { FLIGHT_LIST_RECEIVED, SEARCH_FLIGHT } from './flights.actions';
+import moment from 'moment';
+
+const dateNow = moment(new Date()).format('D-MM-YYYY');
 
 const initState = {
   flightsList: [],
   searchText: '',
+  date: dateNow,
 };
 
 export const flightsReducer = (state = initState, action) => {

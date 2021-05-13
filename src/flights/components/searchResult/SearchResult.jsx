@@ -1,35 +1,29 @@
 import React, { useEffect, useState } from 'react';
 import './searchResult.scss';
-import ArrivalsTabResult from './tabResult/ArrivalsTabResult';
-import DeparturesTabResult from './tabResult/DeparturesTabResult';
 import { Link, Switch, Route, useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as flightListActions from '../../flights.actions';
+import TabResult from './tabResult/TabResult';
 
 const SearchResult = ({ fetchFlightList }) => {
   const location = useLocation();
-  const [status, setStatus] = useState('departures');
-
-  useEffect(() => {
-    if (location.pathname === '/') {
-      setStatus('depatrures');
-    }
-  }, [location]);
+  const [status, setStatus] = useState(location.pathname);
 
   useEffect(() => {
     fetchFlightList();
   }, [fetchFlightList]);
 
-  const isArrivalsActive = status === 'arrivals' ? 'navigation-tabs__btn-active' : '';
-  const isDeparturesActive = status === 'departures' ? 'navigation-tabs__btn-active' : '';
+  const isArrivalsActive = status === '/arrivals' ? 'navigation-tabs__btn-active' : '';
+  const isDeparturesActive = status === '/departures' ? 'navigation-tabs__btn-active' : '';
+  
   return (
     <div className="search-result">
       <ul className="navigation-tabs">
         <li className="navigation-tabs__item">
           <Link
-            to="/departures"
+            to={`/departures${location.search}`}
             className={`navigation-tabs__btn ${isDeparturesActive}`}
-            onClick={() => setStatus('departures')}
+            onClick={() => setStatus('/departures')}
           >
             <i className="fas fa-plane-departure navigation-tabs__btn-icon"></i>
             Departures
@@ -37,9 +31,9 @@ const SearchResult = ({ fetchFlightList }) => {
         </li>
         <li className="navigation-tabs__item">
           <Link
-            to="/arrivals"
+            to={`/arrivals${location.search}`}
             className={`navigation-tabs__btn ${isArrivalsActive}`}
-            onClick={() => setStatus('arrivals')}
+            onClick={() => setStatus('/arrivals')}
           >
             <i className="fas fa-plane-arrival navigation-tabs__btn-icon"></i>
             Arrivals
@@ -47,8 +41,7 @@ const SearchResult = ({ fetchFlightList }) => {
         </li>
       </ul>
       <Switch>
-        <Route path="/departures" component={DeparturesTabResult}></Route>
-        <Route path="/arrivals" component={ArrivalsTabResult}></Route>
+        <Route path={`/:direction?`} component={TabResult}></Route>
       </Switch>
     </div>
   );

@@ -1,7 +1,7 @@
 import { createSelector } from 'reselect';
 
 export const flightListSelector = state => state.flights.flightsList;
-
+export const dateSelector = state => state.flights.date;
 export const searchTextSelector = state => state.flights.searchText;
 
 export const arrivalFlightListSelector = createSelector(

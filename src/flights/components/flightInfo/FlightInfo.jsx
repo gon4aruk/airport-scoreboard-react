@@ -7,21 +7,38 @@ const FlightInfo = ({ flightData }) => {
   const timeOnShedule = flightData.timeDepShedule || flightData.actual;
   const cityName = flightData['airportFromID.city_en'] || flightData['airportToID.city_en'];
   const localTime = moment(new Date(timeOnShedule)).format('HH:mm');
+
   let status;
-  if (flightData.status === 'LN') {
-    status = `Landed at ${moment(new Date(flightData.actual)).format('HH:mm')}`;
-  } else if (flightData.status === 'DP') {
-    status = `Departed at ${moment(new Date(flightData.timeTakeofFact)).format('HH:mm')}`;
-  } else if (flightData.status === 'CX') {
-    status = 'Cancelled';
-  } else if (flightData.status === 'BD') {
-    status = 'Boarding';
-  } else if (flightData.status === 'GC') {
-    status = 'Gate closed';
-  } else if (flightData.status === 'FR') {
-    status = 'In flight';
-  } else if (flightData.status === 'ON') {
-    status = 'On time';
+  switch (flightData.status) {
+    case 'LN':
+      status = `Landed at ${moment(new Date(flightData.actual)).format('HH:mm')}`;
+      break;
+    case 'DP':
+      status = `Departed at ${moment(new Date(flightData.timeTakeofFact)).format('HH:mm')}`;
+      break;
+    case 'DL':
+      status = `Delayed till ${moment(new Date(flightData.actual)).format('HH:mm')}`;
+      break;
+    case 'CX':
+      status = 'Cancelled';
+      break;
+    case 'BD':
+      status = 'Boarding';
+      break;
+    case 'GC':
+      status = 'Gate closed';
+      break;
+    case 'FR':
+      status = 'In flight';
+      break;
+    case 'ON':
+      status = 'On time';
+      break;
+    case 'CK':
+      status = 'Check-in';
+      break;
+    default:
+      status = '';
   }
 
   return (
