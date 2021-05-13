@@ -1,11 +1,11 @@
 import React, { useEffect, useState } from 'react';
 import './tabResult.scss';
-import FlightInfo from '../../flightInfo/FlightInfo';
+import FlightInfo from '../flightInfo/FlightInfo';
 import { connect } from 'react-redux';
 import { useLocation, useParams } from 'react-router-dom';
 import qs from 'qs';
-import { arrivalFlightListSelector, departureFlightListSelector } from '../../../flights.selectors';
-import { searchFlight } from '../../../flights.actions';
+import { arrivalFlightListSelector, departureFlightListSelector } from '../../flights.selectors';
+import { searchFlight } from '../../flights.actions';
 
 const TabResult = ({ arrivalsList, departuresList }) => {
   const [flightList, setFlightList] = useState([]);

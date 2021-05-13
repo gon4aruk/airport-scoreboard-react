@@ -3,11 +3,15 @@ import './searchResult.scss';
 import { Link, Switch, Route, useLocation } from 'react-router-dom';
 import { connect } from 'react-redux';
 import * as flightListActions from '../../flights.actions';
-import TabResult from './tabResult/TabResult';
+import TabResult from '../tabResult/TabResult';
 
 const SearchResult = ({ fetchFlightList }) => {
   const location = useLocation();
-  const [status, setStatus] = useState(location.pathname);
+  const [status, setStatus] = useState('');
+
+  useEffect(() => {
+    setStatus(location.pathname);
+  }, [location]);
 
   useEffect(() => {
     fetchFlightList();
@@ -15,7 +19,6 @@ const SearchResult = ({ fetchFlightList }) => {
 
   const isArrivalsActive = status === '/arrivals' ? 'navigation-tabs__btn-active' : '';
   const isDeparturesActive = status === '/departures' ? 'navigation-tabs__btn-active' : '';
-  
   return (
     <div className="search-result">
       <ul className="navigation-tabs">
