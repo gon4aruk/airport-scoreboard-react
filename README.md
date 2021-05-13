@@ -1,5 +1,7 @@
 ## Airport scoreboard
 
+The site is available at https://objective-noether-0d0aaa.netlify.app/
+
 ## Install
 
     $ git clone https://github.com/gon4aruk/airport-scoreboard-react.git
