@@ -38,4 +38,3 @@ You will also see any lint errors in the console.
 - qs
 
 ### Author: Oleksandr Honcharuk
-
